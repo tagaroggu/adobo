@@ -1,10 +1,24 @@
 # adobo
-lit-html helpers
+Use lit-html with nanostores. Exports one simple function, `useNanostore`.
 
-## Features
-- `createCustomElement`, to create a custom element from a simple object
-- `useReactive`, to use a vue reactive object or ref in a lit-html template without needing to rerender on each value change
-- `useComponent`, to use a simple 
+## Example
+```js
+import { html, render } from 'lit-html';
+import { map, atom } from 'nanostores';
 
-## Stateful components
-Using `useComponent`, it is possible to create and use components that manage their own state and automatically update and render upon changes without needing to call `render` every time a change happens. These automatically update upon a change to any ref or reactive object used within the component. 
+import { useNanostore } from 'adobo';
+
+const count = atom(0);
+
+const Example1 = html`<button @click=${() => count.set(count.get() + 1)}>${useNanostore(count)}</button>`;
+
+render(Example1, document.getElementById('example1'));
+
+// Also works with maps, even deep ones!
+
+const state = map({ count: 0 });
+
+const Example2 = html`<button @click=${() => {state.setKey('count', state.get().count + 1)}}>${useNanostore(state, 'count')}</button>`; // Deep access handled by `dlv` package
+
+render(Example2, document.getElementById('example2'));
+```

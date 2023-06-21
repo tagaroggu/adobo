@@ -1,5 +1,5 @@
 # adobo
-Use lit-html with nanostores. Exports one simple function, `useNanostore`.
+Use lit-html with nanostores. Exports one simple function, `useNanostore`
 
 ## Example
 ```js

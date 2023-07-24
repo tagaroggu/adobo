@@ -1,14 +1,11 @@
 {
   "name": "adobo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "main": "index.js",
   "exports": "./index.js",
   "peerDependencies": {
     "lit-html": "^2.7.4",
     "nanostores": "^0.9.2"
-  },
-  "dependencies": {
-    "dlv": "^1.1.3"
   }
 }

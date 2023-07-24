@@ -1,6 +1,5 @@
 import { directive, AsyncDirective } from 'lit-html/async-directive.js';
-import { listenKeys } from 'nanostores'
-import delve from 'dlv';
+import { listenKeys, getPath } from 'nanostores';
 
 /**
  * @template T
@@ -29,7 +28,7 @@ export const useNanostore = directive(class extends AsyncDirective {
             if (path === undefined) {
                 this.dispose = store.listen((value) => {this.setValue(value)});
             } else {
-                this.dispose = listenKeys(store, [path], (value) => {this.setValue(delve(value, path))})
+                this.dispose = listenKeys(store, [path], (value) => {this.setValue(getPath(value, path))})
             }
         }
         return this.render(store, path);

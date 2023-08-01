@@ -3,7 +3,7 @@ import { listenKeys, getPath } from 'nanostores';
 
 /**
  * @template T
- * @param {import('nanostores').anyStore<T>} store
+ * @param {import('nanostores').Store<T>} store
  * @param {string | undefined} path
  * @function
 */
@@ -13,7 +13,7 @@ export const useNanostore = directive(class extends AsyncDirective {
         if (path === undefined) {
             return store.get();
         } else {
-            return delve(store.get(), path);
+            return getPath(store.get(), path);
         }
     }
 
@@ -42,8 +42,6 @@ export const useNanostore = directive(class extends AsyncDirective {
     }
     
     reconnected() {
-        if (!this.dispose) {
-            this.dispose = store.listen((value) => {this.setValue(value)});
-        }
+        this.update();
     }
 });

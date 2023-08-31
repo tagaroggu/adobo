@@ -1,6 +1,6 @@
 import { directive, AsyncDirective } from 'lit-html/async-directive.js';
 import { listenKeys, getPath } from 'nanostores';
-
+import { html as litHTML } from 'lit-html';
 /**
  * @template T
  * @param {import('nanostores').Store<T>} store
@@ -45,3 +45,27 @@ export const useNanostore = directive(class extends AsyncDirective {
         this.update();
     }
 });
+
+function isAtom(value) {
+    return typeof value === 'object' &&
+    'get' in value && 'set' in value &&
+    'subscribe' in value && 'listen' in value
+}
+
+/**
+ * 
+ * @param {string[]} strings 
+ * @param {unknown[]} values 
+ */
+export function html(strings, ...values) {
+    const subValues = [];
+    values.forEach(value => {
+        if (isAtom(value)) {
+            subValues.push(useNanostore(value));
+        } else {
+            subValues.push(value);
+        }
+    });
+
+    return litHTML(strings, ...subValues);
+}

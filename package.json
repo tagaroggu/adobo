@@ -5,7 +5,11 @@
   "main": "index.js",
   "exports": "./index.js",
   "peerDependencies": {
-    "lit-html": "^2.7.4",
-    "nanostores": "^0.9.2"
+    "lit-html": "^2.8.0",
+    "nanostores": "^0.9.3"
+  },
+  "devDependencies": {
+    "lit-html": "^2.8.0",
+    "nanostores": "^0.9.3"
   }
 }

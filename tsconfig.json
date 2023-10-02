@@ -1,0 +1,3 @@
+{
+    "extends": "@tagaroggu/ts/tsconfig.json"
+}
